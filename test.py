@@ -8,6 +8,7 @@ from random import randint
 from requests import get
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.service import Service
 from time import sleep
 from time import time
 start_time = time()
@@ -19,10 +20,24 @@ url = "https://www.linkedin.com/jobs/search/?f_JT=C%2CF&geoId=90009521&keywords=
 no_of_jobs = 25
 # this will open up new window with the url provided above 
 # driver = webdriver.Chrome()
+'''
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome("chromedriver.exe", options=options)
 driver.get(url)
+'''
+
+'''
+service = Service()
+options = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=service, options=options)
+driver.get(url)
+'''
+service = Service()
+options = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=service, options=options)
+driver.get(url)
+# driver = webdriver.Chrome(service=service, options=options)
 sleep(3)
 action = ActionChains(driver)
 

@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 
 import pandas as pd
 
@@ -39,15 +40,22 @@ def selenium_tests(url):
     location = []
     date = []
     job_link = []
-
+    '''
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     driver = webdriver.Chrome("chromedriver.exe", options=options)
-    wd = webdriver.Chrome(executable_path=r"./chromedriver.exe")
+    '''
+    service = Service()
+    options = webdriver.ChromeOptions()
+    wd = webdriver.Chrome(service=service, options=options)
+
+
+    # wd = webdriver.Chrome(executable_path=r"./chromedriver.exe")
     wd.get(url)
-    # no_of_jobs = int(wd.find_element_by_css_selector('h1>span').get_attribute('innerText'))
-    test = wd.find_element_by_css_selector('')
-    # print(no_of_jobs)
+    no_of_jobs = int(wd.find_element("css selector",'h1>span').get_attribute('innerText'))
+    # test = wd.find_element_by_css_selector('')
+    # test = wd.find_elements("css selector", '.job-listing')
+    print(no_of_jobs)
     '''
     job_lists = wd.find_element_by_class_name('jobs-search__results-list')
     jobs = job_lists.find_elements_by_tag_name('li')
